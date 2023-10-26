@@ -5,7 +5,7 @@ This part is used to train the speaker model and evaluate the performances
 import torch, sys, os, tqdm, numpy, soundfile, time, pickle
 import torch.nn as nn
 from tools import *
-from loss import AAMsoftmax
+# from loss import AAMsoftmax
 from AAMSupCon import SupConLoss
 from model import ECAPA_TDNN
 import os
@@ -24,7 +24,7 @@ class ECAPAModel(nn.Module):
         self.encoder = ECAPA_TDNN(C=C).cuda()
         self.speaker_encoder = nn.DataParallel(self.encoder)
         ## Classifier
-        self.speaker_loss = AAMsoftmax(n_class=n_class, m=m, s=s).cuda()
+        # self.speaker_loss = AAMsoftmax(n_class=n_class, m=m, s=s).cuda()
         self.SupConLoss = SupConLoss().cuda()
 #        self.optim = torch.optim.Adam(self.parameters(), lr=lr, weight_decay=2e-5)
         self.optim = torch.optim.SGD(self.parameters(), lr=lr,momentum=0.9, weight_decay=1.0e-4)
